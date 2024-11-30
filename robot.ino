@@ -251,3 +251,70 @@ void Move_forward_Function() {
     }
   }
 }
+
+void Avoidance_Function() {
+  int Avoidance_distance = 0;
+  Avoidance_Function_flag = true;
+  while (Avoidance_Function_flag) {
+    Avoidance_distance = checkdistance();
+    if (Avoidance_distance <= 25) {
+      if (Avoidance_distance <= 15) {
+        Stop();
+        delay(100);
+        Move_Backward(100);
+        delay(600);
+
+      } else {
+        Stop();
+        delay(100);
+        Rotate_Left(100);
+        delay(600);
+
+      }
+
+    } else {
+      Move_Forward(70);
+
+    }
+    if (Serial.read() == 'S') {
+      Avoidance_Function_flag = false;
+      Stop();
+
+    }
+  }
+}
+
+float checkdistance() {
+  digitalWrite(12, LOW);
+  delayMicroseconds(2);
+  digitalWrite(12, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(12, LOW);
+  float distance = pulseIn(13, HIGH) / 58.00;
+  delay(10);
+  return distance;
+}
+
+void Turn_right_Function() {
+  right_flag = true;
+  while (right_flag) {
+    Rotate_Right(sped_car);
+    if (Serial.read() == 'S') {
+      right_flag = false;
+      Stop();
+
+    }
+  }
+}
+
+void Turn_left_Function() {
+  left_flag = true;
+  while (left_flag) {
+    Rotate_Left(speed_car);
+    if (Serial.read() == 's') {
+      left_flag = false;
+      Stop();
+
+    }
+  }
+}
