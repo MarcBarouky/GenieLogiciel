@@ -195,3 +195,35 @@ void arm_base_clockwise() {
     }
   }
 }
+
+void Move_Forward(int speed) //Define the forward function of the input speed
+{
+  digitalWrite(2,HIGH);
+  analogWrite(5,speed);
+  digitalWrite(4,LOW);
+  analogWrite(6,speed);
+}
+
+void Rotate_Left(int speed) //Define the left rotation function of the input speed
+{
+  digitalWrite(2,LOW);
+  analogWrite(5,speed);
+  digitalWrite(4,LOW);
+  analogWrite(6,speed);
+}
+
+void Rotate_Right(int speed) //Define the right rotation function that can enter the speed
+{
+  digitalWrite(2,HIGH);
+  analogWrite(5,speed);
+  digitalWrite(4,HIGH);
+  analogWrite(6,speed);
+}
+
+void Move_Backward(int speed) //Define the back function of the input speed
+{
+  digitalWrite(2,LOW);
+  analogWrite(5,speed);
+  digitalWrite(4,HIGH);
+  analogWrite(6,speed);
+}
