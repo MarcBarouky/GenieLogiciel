@@ -227,3 +227,27 @@ void Move_Backward(int speed) //Define the back function of the input speed
   digitalWrite(4,HIGH);
   analogWrite(6,speed);
 }
+
+void Move_backward_Function() {
+  backward_flag = false;
+  while (backward_flag) {
+    Move_Backward(speed_car);
+    if (Serial.read() == 'S') {
+      backward_flag = false;
+      Stop();
+
+    }
+  }
+}
+
+void Move_forward_Function() {
+  forward_flag = false;
+  while (forward_flag) {
+    Move_Forward(speed_car);
+    if (Serial.read() == 'S') {
+      forward_flag = false;
+      Stop();
+
+    }
+  }
+}
