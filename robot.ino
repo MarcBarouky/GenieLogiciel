@@ -74,3 +74,79 @@ void setup(){
   Serial.begin(9600);
 
 }
+
+void claw_close() {
+  claw_close_flag = true;
+  while (claw_close_flag) {
+    claw_degrees = claw_degrees + 1;
+    myservo1.write(claw_degrees);
+    Serial.println(claw_degrees);
+    delay(10);
+    if (claw_degrees >= 180) {
+      claw_degrees = 180;
+
+    }
+    if (Serial.read() == 's') {
+      claw_close_flag = false;
+
+    }
+  }
+}
+
+
+void claw_open() {
+  claw_close_flag = true;
+  while (claw_close_flag) {
+    claw_degrees = claw_degrees - 1;
+    myservo1.write(claw_degrees);
+    Serial.println(claw_degrees);
+    delay(10);
+    if (claw_degrees <= 90) {
+      claw_degrees = 90;
+
+    }
+    if (Serial.read() == 's') {
+      claw_close_flag = false;
+
+    }
+  }
+}
+
+void arm_down() {
+  arm_forward_flag = true;
+  while (arm_forward_flag) {
+    arm_degrees = arm_degrees + 1;
+    myservo2.write(arm_degrees);
+    delay(10);
+    Serial.println(arm_degrees);
+    if (arm_degrees >= 135) {
+      arm_degrees = 135;
+
+    }
+    if (Serial.read() == 's') {
+      arm_forward_flag = false;
+
+    }
+  }
+}
+
+
+
+
+void arm_up() {
+  claw_recracted_flag = true;
+  while (claw_recracted_flag) {
+    arm_degrees = arm_degrees - 1;
+    myservo2.write(arm_degrees);
+    Serial.println(arm_degrees);
+    delay(10);
+    if (arm_degrees <= 90) {
+      arm_degrees = 90;
+
+    }
+    if (Serial.read() == 's') {
+      claw_recracted_flag = false;
+
+    }
+  }
+}
