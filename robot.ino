@@ -150,3 +150,48 @@ void arm_up() {
     }
   }
 }
+
+void Stop() {
+  digitalWrite(2,LOW);
+  analogWrite(5,0);
+  digitalWrite(4,HIGH);
+  analogWrite(6,0);
+}
+
+void arm_base_anticlockwise() {
+  base_anticlockwise_flag = true;
+  while (base_anticlockwise_flag) {
+    base_degrees = base_degrees + 1;
+    myservo3.write(base_degrees);
+    Serial.println(base_degrees);
+    delay(10);
+    if (base_degrees >= 180) {
+      base_degrees = 180;
+
+    }
+    if (Serial.read() == 's') {
+      base_anticlockwise_flag = false;
+
+    }
+  }
+}
+
+
+
+void arm_base_clockwise() {
+  base_clockwise_flag = true;
+  while (base_clockwise_flag) {
+    base_degrees = base_degrees - 1;
+    myservo3.write(base_degrees);
+    Serial.println(base_degrees);
+    delay(10);
+    if (base_degrees <= 0) {
+      base_degrees = 0;
+
+    }
+    if (Serial.read() == 's') {
+      base_clockwise_flag = false;
+
+    }
+  }
+}
