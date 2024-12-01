@@ -75,6 +75,62 @@ void setup(){
 
 }
 
+void loop(){
+  while (Serial.available() > 0) {
+    BLE_val = BLE_val + ((char)(Serial.read()));
+    delay(2);
+  }
+  if (0 < String(BLE_val).length() && 2 >= String(BLE_val).length()) {
+    Serial.println(String(BLE_val).length());
+    Serial.println(BLE_val);
+    switch (String(BLE_val).charAt(0)) {
+     case 'o':
+      claw_open();
+      break;
+     case 'c':
+      claw_close();
+      break;
+     case 'u':
+      arm_up();
+      break;
+     case 'd':
+      arm_down();
+      break;
+     case 'l':
+      arm_base_anticlockwise();
+      break;
+     case 'r':
+      arm_base_clockwise();
+      break;
+     case 'F':
+      Move_forward_Function();
+      break;
+     case 'B':
+      Move_backward_Function();
+      break;
+     case 'L':
+      Turn_left_Function();
+      break;
+     case 'R':
+      Turn_right_Function();
+      break;
+     case 'S':
+      Stop();
+      break;
+     case 'A':
+      Avoidance_Function();
+      break;
+    }
+    BLE_val = "";
+
+  } else {
+    BLE_val = "";
+
+  }
+
+}
+
+
 void claw_close() {
   claw_close_flag = true;
   while (claw_close_flag) {
