@@ -297,7 +297,7 @@ void Move_backward_Function() {
 }
 
 void Move_forward_Function() {
-  forward_flag = false;
+  forward_flag = true;
   while (forward_flag) {
     Move_Forward(speed_car);
     if (Serial.read() == 'S') {
