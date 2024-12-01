@@ -285,7 +285,7 @@ void Move_Backward(int speed) //Define the back function of the input speed
 }
 
 void Move_backward_Function() {
-  backward_flag = false;
+  backward_flag = true;
   while (backward_flag) {
     Move_Backward(speed_car);
     if (Serial.read() == 'S') {
@@ -354,7 +354,7 @@ float checkdistance() {
 void Turn_right_Function() {
   right_flag = true;
   while (right_flag) {
-    Rotate_Right(sped_car);
+    Rotate_Right(speed_car);
     if (Serial.read() == 'S') {
       right_flag = false;
       Stop();
@@ -367,7 +367,7 @@ void Turn_left_Function() {
   left_flag = true;
   while (left_flag) {
     Rotate_Left(speed_car);
-    if (Serial.read() == 's') {
+    if (Serial.read() == 'S') {
       left_flag = false;
       Stop();
 
